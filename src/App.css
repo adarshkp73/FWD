@@ -1,0 +1,317 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(231, 230, 228);
+}
+
+.topnav {
+    box-sizing: border-box;
+    background-color: #5CD6D6;
+    height: 10vh;
+    min-height: 50px;
+    width: 100%; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-bottom: 7px solid #102A43;
+    z-index: 2; 
+}
+
+.topnav a {
+    font-family: Poppins, sans-serif;
+    font-size: 38px;
+    color: #102A43;
+    text-decoration: none;
+}
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    padding: 30px 15px;
+    top: 10vh;
+    z-index: 1; 
+    gap: 50px;
+    height: 100vh;
+    width: 12vw;
+    min-width: 60px;
+    background-color: rgb(80, 188, 207);
+    border-right: 7px solid #102A43;
+}
+
+.sports {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vh; 
+}
+
+.sidenav h2 {
+    font-family: Poppins, sans-serif;
+    font-size: 34px;
+    text-align: center;
+}
+
+/* --- UNIFIED BUTTON STYLING --- */
+.sports button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 40px;
+    width: 100%;
+    
+    /* Unified Hockey Color */
+    background-color: #92DAB2; 
+    
+    border: none;
+    border-radius: 6px;
+    
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    text-decoration: none;
+    color: #1A1A1A;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.sports button:hover {
+    /* Unified Hockey Hover Color */
+    background-color: #7ABF96; 
+    transition: all 0.2s;
+}
+
+/* NOTE: Specific sport colors have been removed to keep them uniform */
+
+.login {
+    height: 40px;
+    width: 90px;
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 900;
+    border: 1px solid black;
+    border-radius: 7px;
+    background-color: #36d1d1;
+    color: #1A1A1A;
+    transition: all 0.3s;
+}
+
+.login:hover {
+    background-color: #429ea5a2;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.logo-link {
+    display: block; 
+    padding: 0; 
+}
+
+#main-content {
+    margin-left: calc(12vw + 7px); 
+    margin-top: 10vh; 
+    padding: 40px;
+    min-height: 90vh; 
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+}
+
+.welcome-message,
+.no-games,
+.info-message {
+    text-align: center;
+    margin-top: 10vh;
+    font-family: 'Poppins', sans-serif;
+    color: #102A43;
+}
+.welcome-message h2,
+.no-games h2,
+.info-message h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+.welcome-message p,
+.no-games p,
+.info-message p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    color: #334E68;
+    margin-top: 10px;
+}
+.info-message.error-message h2 {
+    color: #a02c2c;
+}
+
+
+.loader-container {
+    text-align: center;
+    margin-top: 10vh;
+    font-family: 'Poppins', sans-serif;
+    color: #102A43;
+}
+.loader {
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #5CD6D6; 
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; 
+    justify-content: flex-start; 
+}
+
+.sport-card {
+    width: 340px; 
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(16, 42, 67, 0.08); 
+    padding: 22px;
+    box-sizing: border-box;
+    border-left: 6px solid #5CD6D6; 
+    transition: all 0.3s ease;
+}
+
+.sport-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(16, 42, 67, 0.12);
+}
+
+.sport-card.football { border-color: #A7DCA4; }
+.sport-card.hockey { border-color: #92DAB2; }
+.sport-card.basketball { border-color: #F2B988; }
+.sport-card.nba { border-color: #E89B9B; }
+.sport-card.f1 { border-color: #B0A8DA; }
+.sport-card.volleyball { border-color: #F0D695; }
+
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.card-game-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #102A43;
+}
+
+.card-location {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    color: #486581;
+    background-color: #f0f4f8;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.card-teams {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #334E68;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.card-score-status {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #102A43;
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* --- Verbose Scorecard Styling --- */
+.verbose-scorecard-container {
+    margin-top: 20px;
+    padding: 15px 0 0 0; 
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.verbose-score-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #102A43;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.verbose-score-note {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    color: #606060;
+    margin-top: 10px;
+}
+
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.score-table th, .score-table td {
+    border: 1px solid #f0f0f0;
+    padding: 8px 4px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.score-table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    color: #486581;
+}
+
+.score-table .team-col {
+    text-align: left;
+    font-weight: 500;
+    min-width: 80px;
+    color: #334E68;
+    background-color: #fafafa;
+}
+
+.score-table .total-col {
+    font-weight: 700;
+    background-color: #eff3f7;
+    color: #102A43;
+}
