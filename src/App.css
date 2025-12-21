@@ -315,3 +315,74 @@ body {
     background-color: #eff3f7;
     color: #102A43;
 }
+
+/* Media Container */
+.media-container {
+    background-color: #1e1e1e; /* Dark card background */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.media-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.media-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #ffd700; /* Gold accent */
+}
+
+/* Standings Button */
+.standings-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.standings-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Video Container (16:9 Aspect Ratio) */
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    position: relative;
+    height: 0;
+    border-radius: 8px;
+}
+
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+/* Divider between sections */
+.divider {
+    border: 0;
+    height: 1px;
+    background: #333;
+    margin: 20px;
+}
+
+/* Ensure container scrolls if needed */
+.live-scores-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}

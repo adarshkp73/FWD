@@ -12,9 +12,9 @@ import React from 'react';
  */
 const VerboseScorecard = ({ periods, homeTeamName, awayTeamName, score, sport }) => {
     // If no period data is available, display a simple message
-    if (!periods || periods.length === 0) {
+   /* if (!periods || periods.length === 0) {
         return <p className="verbose-score-note">Detailed scores not available for this game.</p>;
-    }
+    }*/
 
     // Determine the label for each period based on the sport
     const getPeriodLabel = (index) => {
