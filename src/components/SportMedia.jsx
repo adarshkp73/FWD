@@ -2,42 +2,49 @@ import React from 'react';
 
 // ==========================================
 // DATA CONFIGURATION
-// You can update these Video IDs and URLs periodically
+// 1. videoSrc: Hardcoded YouTube Embed URL
+// 2. standingsUrl: Link to the official sport standings
 // ==========================================
 const MEDIA_DATA = {
     football: {
         title: "Premier League Highlights",
-        videoId: "p16BiAYCZGQ", // Example: Highlights Video ID
+        // Premier League Highlights
+        videoSrc: "https://www.youtube.com/embed/N-_wj7rGU4M", 
         standingsUrl: "https://www.premierleague.com/tables",
         standingsLabel: "View League Standings"
     },
     hockey: {
-        title: "NHL Latest Action",
-        videoId: "h1Fk6K7c", // Example ID
+        title: "NHL Season Highlights",
+        // NHL Top Goals
+        videoSrc: "https://www.youtube.com/embed/243qGrjk9l8?si=XjUuZwEkuf2SL_oQ", 
         standingsUrl: "https://www.nhl.com/standings",
         standingsLabel: "NHL Standings"
     },
     basketball: {
-        title: "FIBA/International Highlights",
-        videoId: "M5u5z5", // Example ID
+        title: "FIBA World Cup Highlights",
+        // FIBA Best Plays
+        videoSrc: "https://www.youtube.com/embed/YNwgjkkisAE?si=57ZSMScEWxLQcxPv", 
         standingsUrl: "https://www.fiba.basketball/",
         standingsLabel: "FIBA Rankings"
     },
     nba: {
-        title: "NBA Top Plays",
-        videoId: "Iqg6k-sKjVQ", // Example ID
+        title: "NBA Game Highlights",
+        // NBA Top 10 Plays
+        videoSrc: "https://www.youtube.com/embed/cZJQKbo6PE4?si=t0uEtaN1D7ARnIOV", 
         standingsUrl: "https://www.nba.com/standings",
         standingsLabel: "NBA Conference Standings"
     },
     f1: {
-        title: "Formula 1: Race Highlights",
-        videoId: "3f4iRs_y_3g", // Example ID
+        title: "F1 Race Highlights",
+        // F1 Season Best Moments
+        videoSrc: "https://www.youtube.com/embed/ac8o3yRoFIo?si=V1GKH8LsdJdhja_M", 
         standingsUrl: "https://www.formula1.com/en/results.html/2024/drivers.html",
         standingsLabel: "F1 Driver Standings"
     },
     volleyball: {
-        title: "Volleyball World Best Moments",
-        videoId: "VideoID_Here", // Replace with real ID
+        title: "Volleyball World Highlights",
+        // Best Volleyball Rallies
+        videoSrc: "https://www.youtube.com/embed/QEyDaU8P-XM?si=vGZBaoJkzE5ChXro", 
         standingsUrl: "https://en.volleyballworld.com/standings",
         standingsLabel: "VNL Standings"
     }
@@ -46,11 +53,12 @@ const MEDIA_DATA = {
 const SportMedia = ({ sport }) => {
     const data = MEDIA_DATA[sport];
 
-    // If no data is found for the sport (or specific ID missing), render nothing or a fallback
+    // If no data is found for the sport, render nothing
     if (!data) return null;
 
     return (
         <div className="media-container">
+            {/* Header containing Title and Standings Button */}
             <div className="media-header">
                 <h3>{data.title}</h3>
                 <a 
@@ -58,17 +66,28 @@ const SportMedia = ({ sport }) => {
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="standings-btn"
+                    style={{
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        padding: '8px 16px',
+                        textDecoration: 'none',
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        display: 'inline-block'
+                    }}
                 >
                     {data.standingsLabel} &rarr;
                 </a>
             </div>
 
+            {/* Video Player */}
             <div className="video-responsive">
                 <iframe
                     width="853"
                     height="480"
-                    src={`https://www.youtube.com/embed/${data.videoId}`}
-                    title="YouTube video player"
+                    src={data.videoSrc}
+                    title={data.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
