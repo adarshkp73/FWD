@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FootballCard, HockeyCard, BasketballCard, F1Card, VolleyballCard } from './LiveScoreCards';
-import SportMedia from './SportMedia'; // Ensure this import is correct
+import SportMedia from './SportMedia';
 
 // API CONFIGURATION
-const API_KEY = "eb4d0dc2d87f194e9b654de953d6180e"; // Your Key
-const REFRESH_INTERVAL = 3000;
+const API_KEY = "eb4d0dc2d87f194e9b654de953d6180e"; 
 
 function getTodayDateString() {
     return new Date().toISOString().split("T")[0];
@@ -27,6 +26,7 @@ const LiveScores = ({ selectedSport }) => {
     const [games, setGames] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [lastUpdated, setLastUpdated] = useState(null);
 
     const nonLiveStatus = ["Finished", "Not Started", "Cancelled", "Postponed", "Interrupted", "Scheduled"];
 
@@ -54,6 +54,7 @@ const LiveScores = ({ selectedSport }) => {
     const fetchSportData = useCallback(async (sport) => {
         if (!API_ENDPOINTS[sport]) return;
 
+        setIsLoading(true);
         const url = API_ENDPOINTS[sport]();
         const headers = { "x-apisports-key": API_KEY };
 
@@ -77,6 +78,7 @@ const LiveScores = ({ selectedSport }) => {
             const normalized = normalizeGames(sport, data.response);
             setGames(normalized);
             setError(null);
+            setLastUpdated(new Date().toLocaleTimeString());
 
         } catch (err) {
             console.error("Fetch Error:", err);
@@ -92,24 +94,15 @@ const LiveScores = ({ selectedSport }) => {
             setError(null);
             return;
         }
-
-        setIsLoading(true);
         fetchSportData(selectedSport);
-
-        const intervalId = setInterval(() => {
-            fetchSportData(selectedSport);
-        }, REFRESH_INTERVAL);
-
-        return () => {
-            clearInterval(intervalId);
-        };
     }, [selectedSport, fetchSportData]);
 
-    // ------------------------------------------------------------------
-    // RENDER LOGIC
-    // ------------------------------------------------------------------
+    const handleRefresh = () => {
+        if (selectedSport) fetchSportData(selectedSport);
+    };
 
-    // 1. Initial State: No Sport Selected
+    // --- RENDER LOGIC ---
+
     if (!selectedSport) {
         return (
             <div className="welcome-message">
@@ -119,7 +112,6 @@ const LiveScores = ({ selectedSport }) => {
         );
     }
 
-    // 2. Define the content area separately so it doesn't block the Header/Media
     let content;
 
     if (isLoading) {
@@ -134,6 +126,7 @@ const LiveScores = ({ selectedSport }) => {
             <div className="info-message error-message">
                 <h2>Something Went Wrong</h2>
                 <p>{error}</p>
+                <button className="login" onClick={handleRefresh}>Try Again</button>
             </div>
         );
     } else if (!games || games.length === 0) {
@@ -141,10 +134,10 @@ const LiveScores = ({ selectedSport }) => {
             <div className="no-games">
                 <h2>No Live {selectedSport.toUpperCase()} Games Found</h2>
                 <p>Check back soon or watch the highlights above!</p>
+                <button className="login" onClick={handleRefresh} style={{marginTop: '20px'}}>Check Again</button>
             </div>
         );
     } else {
-        // Render Games List
         content = (
             <div className="cards-container">
                 {games.map((game) => {
@@ -162,11 +155,25 @@ const LiveScores = ({ selectedSport }) => {
         );
     }
 
-    // 3. Final Return: Renders Media FIRST, then the Content variable
     return (
         <div className="live-scores-container">
+            {/* KEEPING THE YOUTUBE MEDIA PLAYER */}
             <SportMedia sport={selectedSport} />
-            <hr className="divider" style={{margin: "20px 0", borderColor: "#444"}} />
+            
+            {/* Control Bar for Manual Refresh */}
+            <div className="control-bar">
+                <span className="last-updated">
+                    {lastUpdated ? `Last updated: ${lastUpdated}` : ''}
+                </span>
+                <button 
+                    onClick={handleRefresh} 
+                    className="login refresh-btn" 
+                    disabled={isLoading}
+                >
+                    {isLoading ? 'Refreshing...' : 'Refresh Scores ⟳'}
+                </button>
+            </div>
+
             {content}
         </div>
     );

@@ -7,7 +7,6 @@ const Navbar = ({ onSportSelect }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  // Listen for auth changes (same mechanism as your vanilla main.js)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -22,7 +21,6 @@ const Navbar = ({ onSportSelect }) => {
         navigate('/login');
     } catch (err) {
         console.error('Sign out error', err);
-        alert('Sign out failed: ' + err.message);
     }
   };
 
@@ -40,15 +38,18 @@ const Navbar = ({ onSportSelect }) => {
             
             <Link to="/">NowPlaying!</Link>
             
-            {/* Toggle Button: LOGIN or LOGOUT */}
-            {user ? (
-                <button className="login" onClick={handleLogout}>LOGOUT</button>
-            ) : (
-                <button className="login" onClick={() => navigate('/login')}>LOGIN</button>
-            )}
+            <div className="auth-buttons">
+                {user ? (
+                    <>
+                        <button className="login" onClick={() => navigate('/profile')}>PROFILE</button>
+                        <button className="login" onClick={handleLogout}>LOGOUT</button>
+                    </>
+                ) : (
+                    <button className="login" onClick={() => navigate('/login')}>LOGIN</button>
+                )}
+            </div>
         </nav>
 
-        {/* Sidebar */}
         <nav className="sidenav">
             <h2>Sports</h2>
             <div className="sports">
